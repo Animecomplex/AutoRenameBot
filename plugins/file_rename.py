@@ -314,7 +314,7 @@ async def auto_rename_files(client, message):
                 )
                 await asyncio.sleep(0.5)
             await client.copy_message(
-                chat_id=-1002252580234,
+                chat_id=-1002306621324,
                 from_chat_id=message.chat.id,
                 message_id=aqua.id
             )
