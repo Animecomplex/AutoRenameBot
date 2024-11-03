@@ -283,24 +283,24 @@ async def auto_rename_files(client, message):
         try:
              if media_type == "document":
                  aqua=await client.send_document(
-                 message.chat.id,
-                 document=path,
-                 thumb=ph_path,
-                 caption=caption,
-                 progress=progress_for_pyrogram,
-                 progress_args=("Upload Started...", upload_msg, time.time()),
+                     message.chat.id,
+                     document=path,
+                     thumb=ph_path,
+                     caption=caption,
+                     progress=progress_for_pyrogram,
+                     progress_args=("Upload Started...", upload_msg, time.time()),
                 )
                 await asyncio.sleep(0.5)
             elif media_type == "video":
                 aqua=await client.send_video(
-                message.chat.id,
-                video=path,
-                caption=caption,
-                thumb=ph_path,
-                duration=0,
-                progress=progress_for_pyrogram,
-                progress_args=("Upload Started...", upload_msg, time.time()),
-              )
+                    message.chat.id,
+                    video=path,
+                    caption=caption,
+                    thumb=ph_path,
+                    duration=0,
+                    progress=progress_for_pyrogram,
+                    progress_args=("Upload Started...", upload_msg, time.time()),
+                )
                 await asyncio.sleep(0.5)
             elif media_type == "audio":
                 aqua=await client.send_audio(
@@ -318,7 +318,7 @@ async def auto_rename_files(client, message):
                 from_chat_id=message.chat.id,
                 message_id=aqua.id
             )
-                await message.delete()
+            await message.delete()
         except Exception as e:
             os.remove(renamed_file_path)
             if ph_path:
