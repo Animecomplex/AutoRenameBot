@@ -281,27 +281,29 @@ async def auto_rename_files(client, message):
             img.save(ph_path, "JPEG")
 
         try:
-            if media_type == "document":
-                await client.send_document(
-                    message.chat.id,
-                    document=path,
-                    thumb=ph_path,
-                    caption=caption,
-                    progress=progress_for_pyrogram,
-                    progress_args=("Upload Started...", upload_msg, time.time()),
+             if media_type == "document":
+                 aqua=await client.send_document(
+                 message.chat.id,
+                 document=path,
+                 thumb=ph_path,
+                 caption=caption,
+                 progress=progress_for_pyrogram,
+                 progress_args=("Upload Started...", upload_msg, time.time()),
                 )
+                await asyncio.sleep(0.5)
             elif media_type == "video":
-                await client.send_video(
-                    message.chat.id,
-                    video=path,
-                    caption=caption,
-                    thumb=ph_path,
-                    duration=0,
-                    progress=progress_for_pyrogram,
-                    progress_args=("Upload Started...", upload_msg, time.time()),
-                )
+                aqua=await client.send_video(
+                message.chat.id,
+                video=path,
+                caption=caption,
+                thumb=ph_path,
+                duration=0,
+                progress=progress_for_pyrogram,
+                progress_args=("Upload Started...", upload_msg, time.time()),
+              )
+                await asyncio.sleep(0.5)
             elif media_type == "audio":
-                await client.send_audio(
+                aqua=await client.send_audio(
                     message.chat.id,
                     audio=path,
                     caption=caption,
@@ -310,6 +312,13 @@ async def auto_rename_files(client, message):
                     progress=progress_for_pyrogram,
                     progress_args=("Upload Started...", upload_msg, time.time()),
                 )
+                await asyncio.sleep(0.5)
+            await client.copy_message(
+                chat_id=-1002252580234,
+                from_chat_id=message.chat.id,
+                message_id=aqua.id
+            )
+                await message.delete()
         except Exception as e:
             os.remove(renamed_file_path)
             if ph_path:
